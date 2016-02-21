@@ -1,11 +1,11 @@
-#include "StorkApp.h"
+#include "IbisApp.h"
 #include "Moose.h"
 #include "AppFactory.h"
 #include "ModulesApp.h"
 #include "MooseSyntax.h"
 
 template<>
-InputParameters validParams<StorkApp>()
+InputParameters validParams<IbisApp>()
 {
   InputParameters params = validParams<MooseApp>();
 
@@ -16,40 +16,40 @@ InputParameters validParams<StorkApp>()
   return params;
 }
 
-StorkApp::StorkApp(InputParameters parameters) :
+IbisApp::IbisApp(InputParameters parameters) :
     MooseApp(parameters)
 {
   Moose::registerObjects(_factory);
   ModulesApp::registerObjects(_factory);
-  StorkApp::registerObjects(_factory);
+  IbisApp::registerObjects(_factory);
 
   Moose::associateSyntax(_syntax, _action_factory);
   ModulesApp::associateSyntax(_syntax, _action_factory);
-  StorkApp::associateSyntax(_syntax, _action_factory);
+  IbisApp::associateSyntax(_syntax, _action_factory);
 }
 
-StorkApp::~StorkApp()
+IbisApp::~IbisApp()
 {
 }
 
 // External entry point for dynamic application loading
-extern "C" void StorkApp__registerApps() { StorkApp::registerApps(); }
+extern "C" void IbisApp__registerApps() { IbisApp::registerApps(); }
 void
-StorkApp::registerApps()
+IbisApp::registerApps()
 {
-  registerApp(StorkApp);
+  registerApp(IbisApp);
 }
 
 // External entry point for dynamic object registration
-extern "C" void StorkApp__registerObjects(Factory & factory) { StorkApp::registerObjects(factory); }
+extern "C" void IbisApp__registerObjects(Factory & factory) { IbisApp::registerObjects(factory); }
 void
-StorkApp::registerObjects(Factory & factory)
+IbisApp::registerObjects(Factory & factory)
 {
 }
 
 // External entry point for dynamic syntax association
-extern "C" void StorkApp__associateSyntax(Syntax & syntax, ActionFactory & action_factory) { StorkApp::associateSyntax(syntax, action_factory); }
+extern "C" void IbisApp__associateSyntax(Syntax & syntax, ActionFactory & action_factory) { IbisApp::associateSyntax(syntax, action_factory); }
 void
-StorkApp::associateSyntax(Syntax & /*syntax*/, ActionFactory & /*action_factory*/)
+IbisApp::associateSyntax(Syntax & /*syntax*/, ActionFactory & /*action_factory*/)
 {
 }
